@@ -23,6 +23,7 @@ def index(request):
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     options.add_experimental_option('useAutomationExtension', False)
     options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
     options.add_argument(f'user-agent={user_agent}')
     options.headless = True
     options.add_argument('--disable-blink-features=AutomationControlled')
@@ -31,11 +32,7 @@ def index(request):
     link = request.GET.get(
         'url', 'https://art.co/search?query=artist&type=artworks')
     driver.get(link)
-    print(link)
-    # Parse processed webpage with BeautifulSoup
     soup = BeautifulSoup(driver.page_source)
-    print(soup)
-    # print(soup)
     driver.quit()
     # el = 'script', {'id': '__NEXT_DATA__', 'type': 'application/json'}
     data = soup.find('script', {'id': '__NEXT_DATA__',
