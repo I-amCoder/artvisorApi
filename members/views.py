@@ -15,8 +15,10 @@ def index(request):
     options = Options()
     options.add_argument(f'user-agent={user_agent}')
     options.headless = True
+
     # Instantiate a webdriver
     driver = webdriver.Chrome(options=options)
+
     # Load the HTML page
     link = request.GET.get(
         'url', 'https://art.co/search?query=artist&type=artworks')
