@@ -5,17 +5,17 @@ from django.http import JsonResponse
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 import json
 
 
 def index(request):
     options = Options()
     options.headless = True
-    ua = UserAgent()
+#     ua = UserAgent()
 
-    # user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
-    user_agent = ua.random
+    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
+    #user_agent = ua.random
     # Instantiate a webdriver
 
     options.add_argument("start-maximized")
@@ -27,7 +27,7 @@ def index(request):
     options.add_argument(f'user-agent={user_agent}')
     options.headless = True
     options.add_argument('--disable-blink-features=AutomationControlled')
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome('/home/ubuntu/chromedriver',options=options)
     # Load the HTML page
     link = request.GET.get(
         'url', 'https://art.co/search?query=artist&type=artworks')
